@@ -26,7 +26,7 @@ export class CriarPensamentoComponent implements OnInit {
       autoria: ['Angular'],
       modelo: ['modelo1']
     });
-  }
+  } 
 
   criarPensamento() {
     this.service.criar(this.formulario.value).subscribe(() => {
