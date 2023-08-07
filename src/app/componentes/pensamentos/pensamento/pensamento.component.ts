@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Pensamento } from './../pensamento';
 import { PensamentoService } from '../pensamento.service';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-pensamento',
@@ -16,6 +17,8 @@ export class PensamentoComponent implements OnInit {
     modelo: 'modelo3',
     favorito: false
   }
+
+  @Input() listaFavoritos: Pensamento[] = [];
 
   constructor(private service: PensamentoService) { }
 
@@ -38,8 +41,9 @@ export class PensamentoComponent implements OnInit {
   }
 
   atualizarFavoritos() {
-    this.service.mudarFavorito(this.pensamento).subscribe();
-    console.log(this.pensamento.favorito)
+    this.service.mudarFavorito(this.pensamento).subscribe(() => {
+      this.listaFavoritos.splice(this.listaFavoritos.indexOf(this.pensamento), 1)
+    });
   }
 
 }
